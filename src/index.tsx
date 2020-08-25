@@ -10,10 +10,10 @@ import thunk from 'redux-thunk';
 import reducer from './store/reducer';
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { customTheme } from './custom-theme';
+import { CssBaseline } from '@material-ui/core';
+import { customTheme } from './styles/custom-theme';
 
-import App from './App';
+import App from './containers/App';
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
