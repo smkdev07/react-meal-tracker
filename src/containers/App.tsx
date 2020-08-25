@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, CircularProgress } from '@material-ui/core';
 
 import { NavigationLink } from '../components/Header';
 import Header from '../components/Header';
@@ -33,8 +33,9 @@ const APP_LINKS: NavigationLink[] = [
 
 const App: React.FC = () => {
   const classes = useStyles();
+  const fallback = <CircularProgress />;
   return (
-    <Container disableGutters maxWidth="xl" className={classes.containerMain}>
+    <Container maxWidth="xl" className={classes.containerMain}>
       <Grid
         container
         direction="column"
@@ -51,7 +52,7 @@ const App: React.FC = () => {
                 path="/Home"
                 exact
                 render={(props) => (
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={fallback}>
                     <Home {...props} />
                   </Suspense>
                 )}
@@ -60,7 +61,7 @@ const App: React.FC = () => {
                 path="/About"
                 exact
                 render={(props) => (
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={fallback}>
                     <About {...props} />
                   </Suspense>
                 )}
@@ -69,7 +70,7 @@ const App: React.FC = () => {
                 path="/Dashboard"
                 exact
                 render={(props) => (
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={fallback}>
                     <Dashboard {...props} />
                   </Suspense>
                 )}
@@ -78,14 +79,14 @@ const App: React.FC = () => {
                 path="/SignIn"
                 exact
                 render={(props) => (
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={fallback}>
                     <SignIn {...props} />
                   </Suspense>
                 )}
               />
               <Route
                 render={(props) => (
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={fallback}>
                     <Home {...props} />
                   </Suspense>
                 )}
@@ -94,7 +95,9 @@ const App: React.FC = () => {
           </Main>
         </Grid>
         <Grid item>
-          <Footer>© SMK 2020. All Rights Reserved.</Footer>
+          <Footer>
+            © SMK {new Date().getFullYear()}. All Rights Reserved.
+          </Footer>
         </Grid>
       </Grid>
     </Container>

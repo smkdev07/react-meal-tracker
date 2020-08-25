@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.25rem',
     textDecoration: 'none',
     margin: '0 12px',
-    
+
     '&:last-child': {
       margin: '0 0 0 12px',
     },
@@ -42,29 +42,31 @@ interface NavigationBarProps {
 const NavigationBar: React.FC<NavigationBarProps> = ({ title, links }) => {
   const classes = useStyles();
   return (
-    <header className={classes.header}>
-      <Grid container justify="space-between" alignItems="center">
-        <Grid item>
-          <Typography color="primary" variant="h4">
-            {title}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <nav>
-            {links.map((link) => (
-              <NavLink
-                to={link.path}
-                className={classes.navLink}
-                activeClassName={classes.navLinkActive}
-                key={link.name}
-              >
-                {link.name}
-              </NavLink>
-            ))}
-          </nav>
-        </Grid>
+    <Grid
+      container
+      justify="space-between"
+      alignItems="center"
+      component="header"
+      className={classes.header}
+    >
+      <Grid item>
+        <Typography color="primary" variant="h4">
+          {title}
+        </Typography>
       </Grid>
-    </header>
+      <Grid item component="nav">
+        {links.map((link) => (
+          <NavLink
+            to={link.path}
+            className={classes.navLink}
+            activeClassName={classes.navLinkActive}
+            key={link.name}
+          >
+            {link.name}
+          </NavLink>
+        ))}
+      </Grid>
+    </Grid>
   );
 };
 
