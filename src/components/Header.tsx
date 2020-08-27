@@ -9,9 +9,12 @@ const useStyles = makeStyles((theme) => ({
   header: {
     padding: theme.spacing(1),
   },
+  title: {
+    fontWeight: 'bold',
+  },
   navLink: {
     color: theme.palette.primary.main,
-    fontSize: '1.25rem',
+    fontSize: '1.5rem',
     textDecoration: 'none',
     margin: '0 12px',
 
@@ -32,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 export interface NavigationLink {
   path: string;
   name: string;
+  showMode: 'signin' | 'signout' | 'always';
 }
 
 interface NavigationBarProps {
@@ -50,7 +54,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ title, links }) => {
       className={classes.header}
     >
       <Grid item>
-        <Typography color="primary" variant="h4">
+        <Typography color="primary" variant="h5" className={classes.title}>
           {title}
         </Typography>
       </Grid>
