@@ -56,8 +56,19 @@ const App: React.FC<AppProps> = (props) => {
     props.autoSignIn();
   }, [props]);
 
-  const signedInRoutes = (
+  const routes = (
     <Switch>
+      {props.signedIn ? null : (
+        <Route
+          path="/Home"
+          exact
+          render={(props) => (
+            <Suspense fallback={fallback}>
+              <Home {...props} />
+            </Suspense>
+          )}
+        />
+      )}
       <Route
         path="/About"
         exact
@@ -67,53 +78,17 @@ const App: React.FC<AppProps> = (props) => {
           </Suspense>
         )}
       />
-      <Route
-        path="/Dashboard"
-        exact
-        render={(props) => (
-          <Suspense fallback={fallback}>
-            <Dashboard {...props} />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/SignOut"
-        exact
-        render={(props) => (
-          <Suspense fallback={fallback}>
-            <SignOut {...props} />
-          </Suspense>
-        )}
-      />
-      <Route
-        render={(props) => (
-          <Suspense fallback={fallback}>
-            <About {...props} />
-          </Suspense>
-        )}
-      />
-    </Switch>
-  );
-  const signedOutRoutes = (
-    <Switch>
-      <Route
-        path="/Home"
-        exact
-        render={(props) => (
-          <Suspense fallback={fallback}>
-            <Home {...props} />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/About"
-        exact
-        render={(props) => (
-          <Suspense fallback={fallback}>
-            <About {...props} />
-          </Suspense>
-        )}
-      />
+      {props.signedIn ? (
+        <Route
+          path="/Dashboard"
+          exact
+          render={(props) => (
+            <Suspense fallback={fallback}>
+              <Dashboard {...props} />
+            </Suspense>
+          )}
+        />
+      ) : null}
       <Route
         path="/SignUp"
         exact
@@ -132,13 +107,34 @@ const App: React.FC<AppProps> = (props) => {
           </Suspense>
         )}
       />
-      <Route
-        render={(props) => (
-          <Suspense fallback={fallback}>
-            <Home {...props} />
-          </Suspense>
-        )}
-      />
+      {props.signedIn ? (
+        <Route
+          path="/SignOut"
+          exact
+          render={(props) => (
+            <Suspense fallback={fallback}>
+              <SignOut {...props} />
+            </Suspense>
+          )}
+        />
+      ) : null}
+      {props.signedIn ? (
+        <Route
+          render={(props) => (
+            <Suspense fallback={fallback}>
+              <About {...props} />
+            </Suspense>
+          )}
+        />
+      ) : (
+        <Route
+          render={(props) => (
+            <Suspense fallback={fallback}>
+              <Home {...props} />
+            </Suspense>
+          )}
+        />
+      )}
     </Switch>
   );
 
@@ -161,7 +157,7 @@ const App: React.FC<AppProps> = (props) => {
           />
         </Grid>
         <Grid item>
-          <Main>{props.signedIn ? signedInRoutes : signedOutRoutes}</Main>
+          <Main>{routes}</Main>
         </Grid>
         <Grid item>
           <Footer>

@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
+import { INITIAL_INPUT_FIELD_STATE } from '../utility/forms';
 import { RootState } from '../store/reducers/index';
 import { auth, AuthMode } from '../store/actions/auth';
 
@@ -53,18 +54,16 @@ interface SignInProps extends RouteComponentProps, PropsFromRedux {}
 const SignIn: React.FC<SignInProps> = (props) => {
   const classes = useStyles();
   const [emailAddress, setEmailAddress] = useState({
-    value: '',
-    touched: false,
-    valid: false,
+    ...INITIAL_INPUT_FIELD_STATE,
   });
   const [password, setPassword] = useState({
-    value: '',
-    touched: false,
-    valid: false,
+    ...INITIAL_INPUT_FIELD_STATE,
   });
 
+  const { auth, loading, error, signedIn, location } = props;
+
   const pageMode: { authMode: AuthMode; label: string } =
-    props.location.pathname === '/SignUp'
+    location.pathname === '/SignUp'
       ? { authMode: 'signup', label: 'Sign Up' }
       : { authMode: 'signin', label: 'Sign In' };
 
@@ -81,10 +80,10 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
     switch (field) {
       case 'email':
-        setEmailAddress(updatedField);
+        setEmailAddress((prevState) => updatedField);
         break;
       case 'password':
-        setPassword(updatedField);
+        setPassword((prevState) => updatedField);
         break;
       default:
         break;
@@ -93,27 +92,28 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.auth(emailAddress.value, password.value, pageMode.authMode);
+    auth(emailAddress.value, password.value, pageMode.authMode);
+    setPassword((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
   };
 
   let authRedirect = null;
 
-  if (props.signedIn) {
+  if (signedIn) {
     authRedirect = <Redirect to="/Dashboard" />;
   }
 
   let authErrorMessage = null;
 
-  if (props.error) {
+  if (error) {
     authErrorMessage = (
       <Alert severity="error" className={classes.alert}>
         <AlertTitle>Error</AlertTitle>
-        {props.error}
+        {error}
       </Alert>
     );
   }
 
-  return props.loading ? (
+  return loading ? (
     <div className={classes.containerLoading}>
       <CircularProgress />
     </div>
@@ -135,6 +135,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
           label="Email Address"
           type="email"
           autoFocus
+          value={emailAddress.value}
           onChange={(event) => onFieldChangeHandler(event, 'email')}
           error={emailAddress.touched && !emailAddress.valid}
         />
@@ -146,6 +147,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
           id="password"
           label="Password"
           type="password"
+          value={password.value}
           onChange={(event) => onFieldChangeHandler(event, 'password')}
           error={password.touched && !password.valid}
         />

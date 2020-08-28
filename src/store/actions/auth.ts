@@ -40,8 +40,8 @@ const authFailure = (errorMessage: string): AuthFailureAction => {
 };
 
 export const authSignOut = (): AuthSignOutAction => {
-  localStorage.removeItem('idToken');
-  localStorage.removeItem('localId');
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
   localStorage.removeItem('expirationDate');
   return {
     type: AUTH_SIGN_OUT,
@@ -65,16 +65,16 @@ export const authCheckState = (): ThunkAction<
   Action<string>
 > => {
   return (dispatch) => {
-    const idToken = localStorage.getItem('idToken');
-    if (!idToken) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       dispatch(authSignOut());
     } else {
       const expirationDate = new Date(localStorage.getItem('expirationDate')!);
-      const localId = localStorage.getItem('localId')!;
+      const userId = localStorage.getItem('userId')!;
       if (expirationDate <= new Date()) {
         dispatch(authSignOut());
       } else {
-        dispatch(authSuccess(idToken, localId));
+        dispatch(authSuccess(token, userId));
         dispatch(
           authCheckTimeout(
             (
@@ -107,8 +107,8 @@ export const auth = (
         const expirationDate = new Date(
           new Date().getTime() + expiresIn * 1000
         );
-        localStorage.setItem('idToken', idToken);
-        localStorage.setItem('localId', localId);
+        localStorage.setItem('token', idToken);
+        localStorage.setItem('userId', localId);
         localStorage.setItem('expirationDate', expirationDate.toString());
         dispatch(authSuccess(idToken, localId));
         dispatch(authCheckTimeout(expiresIn));

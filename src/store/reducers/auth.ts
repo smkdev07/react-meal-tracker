@@ -13,15 +13,15 @@ import {
 export interface AuthState {
   token: string | null;
   userId: string | null;
-  error: string | null;
   loading: boolean;
+  error: string | null;
 }
 
 const initialState: AuthState = {
   token: null,
   userId: null,
-  error: null,
   loading: false,
+  error: null,
 };
 
 const authStart = (state: AuthState, action: AuthStartAction) => {
@@ -37,16 +37,16 @@ const authSuccess = (state: AuthState, action: AuthSuccessAction) => {
     ...state,
     token: action.payload.idToken,
     userId: action.payload.localId,
-    error: null,
     loading: false,
+    error: null,
   };
 };
 
 const authFailure = (state: AuthState, action: AuthFailureAction) => {
   return {
     ...state,
-    error: action.payload.errorMessage,
     loading: false,
+    error: action.payload.errorMessage,
   };
 };
 

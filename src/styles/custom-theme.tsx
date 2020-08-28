@@ -4,11 +4,11 @@ export const customTheme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#3f3d56'
+      main: '#3f3d56',
     },
     secondary: {
-      main: '#00BFA6'
-    }
+      main: '#00BFA6',
+    },
   },
   //   overrides: {},
   //   props: {},
