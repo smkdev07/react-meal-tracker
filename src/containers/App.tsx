@@ -22,7 +22,7 @@ const SignOut = React.lazy(() => import('./SignOut'));
 
 const useStyles = makeStyles((theme) => ({
   containerMain: {
-    height: '100vh',
+    height: '100%',
   },
   gridMain: {
     height: '100%',

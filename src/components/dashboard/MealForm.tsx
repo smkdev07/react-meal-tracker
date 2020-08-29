@@ -7,6 +7,11 @@ import { Grid, Paper, TextField, MenuItem, Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { INITIAL_INPUT_FIELD_STATE } from '../../utility/forms';
+import {
+  gramsProtienToCalories,
+  gramsFatToCalories,
+  gramsCarbohydrateToCalories,
+} from '../../utility/formulas';
 import { RootState } from '../../store/reducers/index';
 import { Meal } from '../../store/reducers/meals';
 import {
@@ -88,7 +93,12 @@ const MealForm: React.FC<MealFormProps> = (props) => {
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const totalCalories =
+      gramsProtienToCalories(+gramsProtien.value) +
+      gramsFatToCalories(+gramsFat.value) +
+      gramsCarbohydrateToCalories(+gramsCarbohydrate.value);
     logEntry(token!, {
+      id: '',
       userId: userId!,
       loggedTime: new Date(),
       category: mealCategory.value,
@@ -96,6 +106,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
       gramsProtien: +gramsProtien.value,
       gramsFat: +gramsFat.value,
       gramsCarbohydrate: +gramsCarbohydrate.value,
+      totalCalories,
     });
     setMealCategory((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
     setMealDescription((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
@@ -151,7 +162,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               required
               fullWidth
               id="gramsprotien"
-              label="Grams Protien"
+              label="Protein (g)"
               type="number"
               value={gramsProtien.value}
               onChange={(event) => onFieldChangeHandler(event, 'gramsProtien')}
@@ -165,7 +176,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               required
               fullWidth
               id="gramsfat"
-              label="Grams Fat"
+              label="Fat (g)"
               type="number"
               value={gramsFat.value}
               onChange={(event) => onFieldChangeHandler(event, 'gramsFat')}
@@ -179,7 +190,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               required
               fullWidth
               id="gramscarbohydrate"
-              label="Grams Carbohydrate"
+              label="Carbohydrate (g)"
               type="number"
               value={gramsCarbohydrate.value}
               onChange={(event) =>

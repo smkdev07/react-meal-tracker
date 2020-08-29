@@ -4,12 +4,18 @@ import { Redirect } from 'react-router-dom';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import { authSignOut } from '../store/actions/index';
+import {
+  authSignOut,
+  setMealCategories,
+  setMeals,
+} from '../store/actions/index';
 
 interface SignOutProps extends PropsFromRedux {}
 
 const SignOut: React.FC<SignOutProps> = (props) => {
   useEffect(() => {
+    props.clearMealCategories();
+    props.clearMealEntires();
     props.signOut();
   }, [props]);
 
@@ -18,6 +24,8 @@ const SignOut: React.FC<SignOutProps> = (props) => {
 
 const mapDispatch = {
   signOut: () => authSignOut(),
+  clearMealCategories: () => setMealCategories([]),
+  clearMealEntires: () => setMeals([]),
 };
 
 const connector = connect(null, mapDispatch);

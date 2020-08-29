@@ -5,6 +5,8 @@ import { Grid, Typography } from '@material-ui/core';
 
 import AboutImage from '../assets/about_image.svg';
 
+import SectionHeader from '../components/SectionHeader';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     height: '100%',
@@ -12,14 +14,6 @@ const useStyles = makeStyles((theme) => ({
   contentSection: {
     marginTop: theme.spacing(20),
     paddingRight: theme.spacing(5),
-  },
-  overline: {
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: 4,
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(1),
-    height: 8,
-    width: 48,
   },
   image: {
     height: '100%',
@@ -45,10 +39,7 @@ const About: React.FC<AboutProps> = (props) => {
           </Typography>
         </header>
         <section>
-          <div className={classes.overline} />
-          <Typography color="textSecondary" variant="h5">
-            Meal Tracker
-          </Typography>
+          <SectionHeader title="Meal Tracker" />
           <Typography color="textPrimary" variant="body1">
             This meal tracking application empowers users to easily track their
             meals. Users can register and sign in to log meals and view their
@@ -56,10 +47,7 @@ const About: React.FC<AboutProps> = (props) => {
           </Typography>
         </section>
         <section>
-          <div className={classes.overline} />
-          <Typography color="textSecondary" variant="h5">
-            Powered By
-          </Typography>
+          <SectionHeader title="Powered By" />
           <Typography color="textPrimary" variant="body1">
             The application is built using with React & TypeScript. The UI is
             built with a combination of Material-UI and custom CSS-in-JS. The

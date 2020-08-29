@@ -5,7 +5,6 @@ export const SET_MEAL_CATEGORIES = 'SET_MEAL_CATEGORIES';
 export const SET_MEALS = 'SET_MEALS';
 export const GET_FAILURE = 'GET_FAILURE';
 export const ADD_MEAL = 'ADD_MEAL';
-export const UPDATE_MEAL = 'UPDATE_MEAL';
 export const REMOVE_MEAL = 'REMOVE_MEAL';
 
 export interface GetStartAction {
@@ -32,14 +31,9 @@ export interface AddMealAction {
   payload: { meal: Meal };
 }
 
-export interface UpdateMealAction {
-  type: typeof UPDATE_MEAL;
-  payload: Meal;
-}
-
 export interface RemoveMealAction {
   type: typeof REMOVE_MEAL;
-  payload: { loggedTime: Date };
+  payload: { id: String };
 }
 
 export type MealsActionTypes =
@@ -48,5 +42,4 @@ export type MealsActionTypes =
   | SetMealsAction
   | GetFailureAction
   | AddMealAction
-  | UpdateMealAction
   | RemoveMealAction;

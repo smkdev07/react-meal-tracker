@@ -3,4 +3,7 @@ export {
   getMealCategories,
   getMealsFromDatabase,
   addMealToDatabase,
+  removeMealFromDatabase,
+  setMealCategories,
+  setMeals,
 } from './meals';

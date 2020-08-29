@@ -4,21 +4,18 @@ import {
   SET_MEALS,
   GET_FAILURE,
   ADD_MEAL,
-  UPDATE_MEAL,
   REMOVE_MEAL,
   GetStartAction,
   SetMealCategoriesAction,
   SetMealsAction,
   GetFailureAction,
   AddMealAction,
-  UpdateMealAction,
   RemoveMealAction,
   MealsActionTypes,
 } from '../actions/meals-action-types';
 
-// calculate cals for protien, fat, carbs, total cals
 export interface Meal {
-  id?: string;
+  id: string;
   userId: string;
   loggedTime: Date;
   category: string;
@@ -26,6 +23,7 @@ export interface Meal {
   gramsProtien: number;
   gramsFat: number;
   gramsCarbohydrate: number;
+  totalCalories: number;
 }
 
 export interface MealsState {
@@ -88,19 +86,14 @@ const addMeal = (state: MealsState, action: AddMealAction) => {
   };
 };
 
-// const updateMeal = (state: MealsState, action: UpdateMealAction) => {
-//   return {
-//     ...state,
-//     meals: [...state.meals, action.payload],
-//   };
-// };
-
-// const removeMeal = (state: MealsState, action: RemoveMealAction) => {
-//   return {
-//     ...state,
-//     meals: [...state.meals, action.payload],
-//   };
-// };
+const removeMeal = (state: MealsState, action: RemoveMealAction) => {
+  return {
+    ...state,
+    meals: state.meals.filter((meal) => meal.id !== action.payload.id),
+    loading: false,
+    error: null,
+  };
+};
 
 const mealsReducer = (state = initialState, action: MealsActionTypes) => {
   switch (action.type) {
@@ -114,10 +107,8 @@ const mealsReducer = (state = initialState, action: MealsActionTypes) => {
       return getFailure(state, action);
     case ADD_MEAL:
       return addMeal(state, action);
-    // case UPDATE_MEAL:
-    //   return updateMeal(state, action);
-    // case REMOVE_MEAL:
-    //   return removeMeal(state, action);
+    case REMOVE_MEAL:
+      return removeMeal(state, action);
     default:
       return state;
   }

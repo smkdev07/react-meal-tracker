@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(1),
-    height: 'calc(100vh - 94px)',
+    minHeight: 'calc(100vh - 94px)',
   },
 }));
 
