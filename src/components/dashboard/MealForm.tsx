@@ -4,7 +4,6 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, TextField, MenuItem, Button } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { INITIAL_INPUT_FIELD_STATE } from '../../utility/forms';
 import {
@@ -43,15 +42,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
     ...INITIAL_INPUT_FIELD_STATE,
   });
 
-  const {
-    token,
-    userId,
-    loading,
-    error,
-    mealCategories,
-    getMealCategories,
-    logEntry,
-  } = props;
+  const { token, userId, mealCategories, getMealCategories, logEntry } = props;
 
   useEffect(() => {
     if (mealCategories.length === 0) {
@@ -119,7 +110,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
     <Paper elevation={2} className={classes.paper}>
       <form noValidate onSubmit={onSubmitHandler}>
         <Grid container justify="space-around" alignItems="center" spacing={1}>
-          <Grid item xs={12} md={4} lg={2}>
+          <Grid item xs={12} md={4} xl={2}>
             <TextField
               variant="outlined"
               margin="dense"
@@ -139,7 +130,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={12} md={4} lg={2}>
+          <Grid item xs={12} md={4} xl={2}>
             <TextField
               variant="outlined"
               margin="dense"
@@ -155,7 +146,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               error={mealDescription.touched && !mealDescription.valid}
             />
           </Grid>
-          <Grid item xs={12} md={4} lg={2}>
+          <Grid item xs={12} md={4} xl={2}>
             <TextField
               variant="outlined"
               margin="dense"
@@ -169,7 +160,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               error={gramsProtien.touched && !gramsProtien.valid}
             />
           </Grid>
-          <Grid item xs={12} md={4} lg={2}>
+          <Grid item xs={12} md={4} xl={2}>
             <TextField
               variant="outlined"
               margin="dense"
@@ -183,7 +174,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               error={gramsFat.touched && !gramsFat.valid}
             />
           </Grid>
-          <Grid item xs={12} md={4} lg={2}>
+          <Grid item xs={12} md={4} xl={2}>
             <TextField
               variant="outlined"
               margin="dense"
@@ -199,7 +190,7 @@ const MealForm: React.FC<MealFormProps> = (props) => {
               error={gramsCarbohydrate.touched && !gramsCarbohydrate.valid}
             />
           </Grid>
-          <Grid item xs={12} md={4} lg={1}>
+          <Grid item xs={12} md={4} xl={1}>
             <Button
               type="submit"
               fullWidth
@@ -227,8 +218,6 @@ const mapState = (state: RootState) => ({
   token: state.auth.token,
   userId: state.auth.userId,
   mealCategories: state.meals.mealCategories,
-  loading: state.meals.loading,
-  error: state.meals.error,
 });
 
 const mapDispatch = {

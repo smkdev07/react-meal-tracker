@@ -8,11 +8,11 @@ import { Grid, Typography, Button } from '@material-ui/core';
 import LandingImage from '../assets/landing_image.svg';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    height: '100%',
+  ctaContainer: {
+    paddingTop: '11%',
+    marginBottom: theme.spacing(8),
   },
   headline: {
-    marginTop: theme.spacing(25),
     marginBottom: theme.spacing(2),
   },
   subHeadline: {
@@ -36,9 +36,8 @@ const Home: React.FC<HomeProps> = (props) => {
       container
       justify="center"
       // alignItems="center"
-      className={classes.container}
     >
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={6} className={classes.ctaContainer}>
         <Typography color="primary" variant="h2" className={classes.headline}>
           Simplify the way you track meals.
         </Typography>

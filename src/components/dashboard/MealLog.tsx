@@ -23,12 +23,6 @@ import { Meal } from '../../store/reducers/meals';
 import { removeMealFromDatabase } from '../../store/actions/index';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: '100%',
-  },
-  table: {
-    minWidth: 850,
-  },
   visuallyHidden: {
     border: 0,
     clip: 'rect(0 0 0 0)',
@@ -207,46 +201,44 @@ const MealLog: React.FC<MealLogProps> = (props) => {
   };
 
   return (
-    <Paper className={classes.paper}>
-      <TableContainer>
-        <Table className={classes.table} size="small" stickyHeader>
-          <EnhancedTableHead
-            classes={classes}
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={onRequestSortHandler}
-          />
-          <TableBody>
-            {stableSort(meals, getComparator(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow hover key={row.id}>
-                  <TableCell align="left">
-                    {row.loggedTime.toLocaleString()}
-                  </TableCell>
-                  <TableCell align="left">{row.category}</TableCell>
-                  <TableCell align="left">{row.description}</TableCell>
-                  <TableCell align="right">{row.gramsProtien}</TableCell>
-                  <TableCell align="right">{row.gramsFat}</TableCell>
-                  <TableCell align="right">{row.gramsCarbohydrate}</TableCell>
-                  <TableCell align="right">{row.totalCalories}</TableCell>
-                  <TableCell padding="checkbox" align="right">
-                    <Tooltip title="Delete Entry" arrow>
-                      <IconButton onClick={() => onDeleteEntryHandler(row.id)}>
-                        <DeleteIcon color="error" />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 33 * emptyRows }}>
-                <TableCell colSpan={6} />
+    <TableContainer component={Paper} elevation={2}>
+      <Table size="small" stickyHeader>
+        <EnhancedTableHead
+          classes={classes}
+          order={order}
+          orderBy={orderBy}
+          onRequestSort={onRequestSortHandler}
+        />
+        <TableBody>
+          {stableSort(meals, getComparator(order, orderBy))
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((row) => (
+              <TableRow hover key={row.id}>
+                <TableCell align="left">
+                  {row.loggedTime.toLocaleString()}
+                </TableCell>
+                <TableCell align="left">{row.category}</TableCell>
+                <TableCell align="left">{row.description}</TableCell>
+                <TableCell align="right">{row.gramsProtien}</TableCell>
+                <TableCell align="right">{row.gramsFat}</TableCell>
+                <TableCell align="right">{row.gramsCarbohydrate}</TableCell>
+                <TableCell align="right">{row.totalCalories}</TableCell>
+                <TableCell padding="checkbox" align="right">
+                  <Tooltip title="Delete Entry" arrow>
+                    <IconButton onClick={() => onDeleteEntryHandler(row.id)}>
+                      <DeleteIcon color="error" />
+                    </IconButton>
+                  </Tooltip>
+                </TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            ))}
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 33 * emptyRows }}>
+              <TableCell colSpan={6} />
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
@@ -256,7 +248,7 @@ const MealLog: React.FC<MealLogProps> = (props) => {
         onChangePage={onPageChangeHandler}
         onChangeRowsPerPage={onChangeRowsPerPageHandler}
       />
-    </Paper>
+    </TableContainer>
   );
 };
 

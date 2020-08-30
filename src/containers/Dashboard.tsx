@@ -9,14 +9,14 @@ import SectionHeader from '../components/SectionHeader';
 import MealForm from '../components/dashboard/MealForm';
 import MealKPI from '../components/dashboard/MealKPI';
 import MealLog from '../components/dashboard/MealLog';
+import MealCharts from '../components/dashboard/MealCharts';
 
 import { RootState } from '../store/reducers/index';
 import { getMealsFromDatabase } from '../store/actions/index';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    height: '100%',
-    width: '100%',
+  chartSection: {
+    marginTop: theme.spacing(4),
   },
 }));
 
@@ -32,16 +32,10 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
   }, [token, userId, getMealEntries]);
 
   return (
-    <Grid
-      container
-      justify="center"
-      alignItems="flex-start"
-      spacing={0}
-      className={classes.container}
-    >
+    <Grid container justify="center" alignItems="flex-start" spacing={0}>
       <Grid item xs={12} component="header">
         <Typography color="primary" variant="h3">
-          My Dashboard
+          Dashboard
         </Typography>
       </Grid>
       <Grid item xs={12} component="section">
@@ -52,7 +46,9 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
         <SectionHeader title="Entry Stats" spacingBottom={1} />
         <MealKPI />
       </Grid>
-      <Grid item xs={12} component="section"></Grid>
+      <Grid item xs={12} component="section" className={classes.chartSection}>
+        <MealCharts />
+      </Grid>
       <Grid item xs={12} component="section">
         <SectionHeader title="Entry Log" spacingBottom={1} />
         <MealLog />

@@ -8,12 +8,10 @@ import AboutImage from '../assets/about_image.svg';
 import SectionHeader from '../components/SectionHeader';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    height: '100%',
-  },
   contentSection: {
-    marginTop: theme.spacing(20),
+    marginTop: theme.spacing(2),
     paddingRight: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
   },
   image: {
     height: '100%',
@@ -30,7 +28,6 @@ const About: React.FC<AboutProps> = (props) => {
       container
       justify="center"
       // alignItems="center"
-      className={classes.container}
     >
       <Grid item xs={12} md={6} className={classes.contentSection}>
         <header>

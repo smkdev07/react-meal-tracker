@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, CircularProgress } from '@material-ui/core';
 
 import { NavigationLink } from '../components/Header';
@@ -20,19 +20,7 @@ const Dashboard = React.lazy(() => import('./Dashboard'));
 const SignIn = React.lazy(() => import('./SignIn'));
 const SignOut = React.lazy(() => import('./SignOut'));
 
-const useStyles = makeStyles((theme) => ({
-  containerMain: {
-    height: '100%',
-  },
-  gridMain: {
-    height: '100%',
-  },
-  fallback: {
-    display: 'grid',
-    placeItems: 'center',
-    height: '100%',
-  },
-}));
+// const useStyles = makeStyles((theme) => ({}));
 
 const APP_LINKS: NavigationLink[] = [
   { path: '/Home', name: 'Home', showMode: 'signout' },
@@ -45,12 +33,8 @@ const APP_LINKS: NavigationLink[] = [
 interface AppProps extends PropsFromRedux {}
 
 const App: React.FC<AppProps> = (props) => {
-  const classes = useStyles();
-  const fallback = (
-    <div className={classes.fallback}>
-      <CircularProgress />
-    </div>
-  );
+  // const classes = useStyles();
+  const fallback = <CircularProgress />;
 
   useEffect(() => {
     props.autoSignIn();
@@ -139,13 +123,8 @@ const App: React.FC<AppProps> = (props) => {
   );
 
   return (
-    <Container maxWidth="xl" className={classes.containerMain}>
-      <Grid
-        container
-        direction="column"
-        justify="space-between"
-        className={classes.gridMain}
-      >
+    <Container maxWidth="xl">
+      <Grid container direction="column" justify="space-between">
         <Grid item>
           <Header
             title="Meal Tracker"

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
   Card,
@@ -14,43 +14,23 @@ import {
 import { RootState } from '../../store/reducers/index';
 import { getEntryStatistics } from '../../store/selectors/meals';
 
-const useStyles = makeStyles((theme) => ({
-  protien: {
-    color: '#F50057',
-  },
-  fat: {
-    color: '#F9A826',
-  },
-  carbohydrate: {
-    color: '#00B0FF',
-  },
-}));
+// const useStyles = makeStyles((theme) => ({}));
 
 interface MealKPIProps extends PropsFromRedux {}
 
 const MealKPI: React.FC<MealKPIProps> = (props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <Grid container justify="space-between" alignItems="stretch" spacing={1}>
       {props.entryStatistics.map((statistic) => (
-        <Grid item xs={12} md={6} lg={3} key={statistic.id}>
-          <Card>
+        <Grid item xs={12} md={6} lg={6} xl={3} key={statistic.id}>
+          <Card elevation={2}>
             <CardHeader title={statistic.label} />
             <CardContent>
               <Typography
                 variant="h2"
-                color="secondary"
                 display="inline"
-                className={
-                  statistic.id === 'protien'
-                    ? classes.protien
-                    : statistic.id === 'fat'
-                    ? classes.fat
-                    : statistic.id === 'carbohydrate'
-                    ? classes.carbohydrate
-                    : undefined
-                }
-                style={{ fontWeight: 'bold' }}
+                style={{ color: statistic.color, fontWeight: 'bold' }}
               >
                 {statistic.calories}
               </Typography>
