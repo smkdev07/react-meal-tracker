@@ -13,6 +13,7 @@ import {
   TableRow,
   TableCell,
   TablePagination,
+  Chip,
   IconButton,
   Tooltip,
 } from '@material-ui/core';
@@ -178,8 +179,8 @@ const MealLog: React.FC<MealLogProps> = (props) => {
     property: keyof Meal
   ) => {
     const isAsc = orderBy === property && order === 'asc';
-    setOrder((prevState) => (isAsc ? 'desc' : 'asc'));
-    setOrderBy((prevState) => property);
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
   };
 
   const onDeleteEntryHandler = (entryId: string) => {
@@ -190,14 +191,14 @@ const MealLog: React.FC<MealLogProps> = (props) => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
     newPage: number
   ) => {
-    setPage((prevState) => newPage);
+    setPage(newPage);
   };
 
   const onChangeRowsPerPageHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setRowsPerPage((prevState) => parseInt(event.target.value, 10));
-    setPage((prevState) => 0);
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
@@ -222,7 +223,9 @@ const MealLog: React.FC<MealLogProps> = (props) => {
                 <TableCell align="right">{row.gramsProtien}</TableCell>
                 <TableCell align="right">{row.gramsFat}</TableCell>
                 <TableCell align="right">{row.gramsCarbohydrate}</TableCell>
-                <TableCell align="right">{row.totalCalories}</TableCell>
+                <TableCell align="right">
+                  <Chip label={row.totalCalories} color="secondary" />
+                </TableCell>
                 <TableCell padding="checkbox" align="right">
                   <Tooltip title="Delete Entry" arrow>
                     <IconButton onClick={() => onDeleteEntryHandler(row.id)}>
@@ -255,8 +258,6 @@ const MealLog: React.FC<MealLogProps> = (props) => {
 const mapState = (state: RootState) => ({
   token: state.auth.token,
   meals: state.meals.meals,
-  loading: state.meals.loading,
-  error: state.meals.error,
 });
 
 const mapDispatch = {

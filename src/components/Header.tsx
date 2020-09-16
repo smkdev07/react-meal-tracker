@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     margin: '0 12px',
 
+    '&:first-child': {
+      margin: '0 12px 0 0',
+    },
     '&:last-child': {
       margin: '0 0 0 12px',
     },

@@ -79,10 +79,10 @@ const SignIn: React.FC<SignInProps> = (props) => {
 
     switch (field) {
       case 'email':
-        setEmailAddress((prevState) => updatedField);
+        setEmailAddress(updatedField);
         break;
       case 'password':
-        setPassword((prevState) => updatedField);
+        setPassword(updatedField);
         break;
       default:
         break;
@@ -92,7 +92,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     auth(emailAddress.value, password.value, pageMode.authMode);
-    setPassword((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
+    setPassword({ ...INITIAL_INPUT_FIELD_STATE });
   };
 
   let authRedirect = null;

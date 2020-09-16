@@ -46,10 +46,10 @@ const About: React.FC<AboutProps> = (props) => {
         <section>
           <SectionHeader title="Powered By" />
           <Typography color="textPrimary" variant="body1">
-            The application is built using with React & TypeScript. The UI is
-            built with a combination of Material-UI and custom CSS-in-JS. The
-            charting library used for the dashboard is Nivo. Data is stored both
-            locally using Redux and in Google Firebase through REST APIs in
+            The application is built using React & TypeScript. The UI is built
+            with a combination of Material-UI and custom CSS-in-JS. The charting
+            library used for the dashboard is Nivo. Data is sync'd and stored
+            both locally using Redux and in Google Firebase through REST APIs in
             conjunction with Thunk middleware.
           </Typography>
         </section>

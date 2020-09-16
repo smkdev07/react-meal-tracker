@@ -63,19 +63,19 @@ const MealForm: React.FC<MealFormProps> = (props) => {
 
     switch (field) {
       case 'mealCategory':
-        setMealCategory((prevState) => updatedField);
+        setMealCategory(updatedField);
         break;
       case 'mealDescription':
-        setMealDescription((prevState) => updatedField);
+        setMealDescription(updatedField);
         break;
       case 'gramsProtien':
-        setGramsProtien((prevState) => updatedField);
+        setGramsProtien(updatedField);
         break;
       case 'gramsFat':
-        setGramsFat((prevState) => updatedField);
+        setGramsFat(updatedField);
         break;
       case 'gramsCarbohydrate':
-        setGramscarbohydrate((prevState) => updatedField);
+        setGramscarbohydrate(updatedField);
         break;
       default:
         break;
@@ -99,11 +99,11 @@ const MealForm: React.FC<MealFormProps> = (props) => {
       gramsCarbohydrate: +gramsCarbohydrate.value,
       totalCalories,
     });
-    setMealCategory((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
-    setMealDescription((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
-    setGramsProtien((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
-    setGramsFat((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
-    setGramscarbohydrate((prevState) => ({ ...INITIAL_INPUT_FIELD_STATE }));
+    setMealCategory({ ...INITIAL_INPUT_FIELD_STATE });
+    setMealDescription({ ...INITIAL_INPUT_FIELD_STATE });
+    setGramsProtien({ ...INITIAL_INPUT_FIELD_STATE });
+    setGramsFat({ ...INITIAL_INPUT_FIELD_STATE });
+    setGramscarbohydrate({ ...INITIAL_INPUT_FIELD_STATE });
   };
 
   return (
